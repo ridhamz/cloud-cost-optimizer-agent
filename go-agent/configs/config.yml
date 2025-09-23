@@ -9,8 +9,6 @@ thresholds:
   rds_cpu_utilization: 25
 
 protected_resources:
-  - i-prod-123
-  - r-prod-456
 
 ai:
   claude_api_key: 'YOUR_CLAUDE_API_KEY'
