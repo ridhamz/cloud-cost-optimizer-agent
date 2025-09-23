@@ -23,7 +23,7 @@ func main() {
 	fmt.Println("🚀 Starting AI-Powered Cloud Cost Optimizer Agent...")
 
 	// Step 1: Collect AWS resource data
-	resources, err := aws.FetchEC2Instances()
+	resources, err := aws.FetchResources(config.AppConfig.AWS.Region)
 	if err != nil {
 		log.Fatalf("Error fetching AWS resources: %v", err)
 	}
