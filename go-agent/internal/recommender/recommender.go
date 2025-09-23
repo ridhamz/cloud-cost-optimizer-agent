@@ -13,7 +13,7 @@ func GenerateRecommendations(analysis []analyzer.Analysis) []Recommendation {
 		if a.UnderUtilized {
 			recs = append(recs, Recommendation{
 				ResourceID: a.ResourceID,
-				Action:     "Consider downsizing or stopping",
+				Action:     a.Recommendation,
 			})
 		}
 	}

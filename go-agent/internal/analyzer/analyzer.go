@@ -3,6 +3,7 @@ package analyzer
 import (
 	"fmt"
 
+	config "github.com/ridhamz/AI-cloud-cost-optimizer-agent/configs"
 	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/aws"
 )
 
@@ -13,14 +14,21 @@ type Analysis struct {
 	Recommendation string
 }
 
-// AnalyzeResources uses Claude AI to generate recommendations
 func AnalyzeResources(resources []aws.Resource) []Analysis {
 	var results []Analysis
 
 	for _, r := range resources {
-		// Create a prompt for Claude
+		// Simple underutilization check from config thresholds
+		underUtilized := false
+		threshold := config.AppConfig.Thresholds.EC2CPUUtilization
+
+		if r.Usage < threshold {
+			underUtilized = true
+		}
+
+		// Prompt Claude for recommendation
 		prompt := fmt.Sprintf(
-			"Analyze the following AWS resource and give cost optimization advice:\nResource ID: %s\nType: %s\nUsage: %.2f\nCost: %.2f",
+			"Analyze this AWS resource and give cost optimization advice:\nResource ID: %s\nType: %s\nUsage: %.2f\nCost: %.2f",
 			r.ID, r.Type, r.Usage, r.Cost,
 		)
 
@@ -31,8 +39,8 @@ func AnalyzeResources(resources []aws.Resource) []Analysis {
 
 		results = append(results, Analysis{
 			ResourceID:     r.ID,
-			UnderUtilized:  r.Usage < 30, // simple threshold
-			Savings:        r.Cost * 0.5, // mock savings
+			UnderUtilized:  underUtilized,
+			Savings:        r.Cost * 0.5,
 			Recommendation: recommendation,
 		})
 	}
