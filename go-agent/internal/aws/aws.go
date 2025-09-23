@@ -12,6 +12,8 @@ type Resource struct {
 	ID     string
 	Type   string
 	Region string
+	Cost   float64
+	Usage  float64
 }
 
 func FetchEC2Instances() ([]Resource, error) {

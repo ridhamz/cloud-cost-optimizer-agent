@@ -1,32 +1,41 @@
 package analyzer
 
-import "github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/aws"
+import (
+	"fmt"
+
+	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/aws"
+)
 
 type Analysis struct {
-	ResourceID    string
-	UnderUtilized bool
-	Savings       float64
-	Confidence    float64 // AI confidence score
+	ResourceID     string
+	UnderUtilized  bool
+	Savings        float64
+	Recommendation string
 }
 
-// Fake AI scoring for demonstration
+// AnalyzeResources uses Claude AI to generate recommendations
 func AnalyzeResources(resources []aws.Resource) []Analysis {
-	var result []Analysis
+	var results []Analysis
+
 	for _, r := range resources {
-		underUtilized := false
-		confidence := 0.0
-		// Simulate AI detecting underutilization
-		if r.Type == "EC2" {
-			underUtilized = true // pretend AI detected low usage
-			confidence = 0.85
+		// Create a prompt for Claude
+		prompt := fmt.Sprintf(
+			"Analyze the following AWS resource and give cost optimization advice:\nResource ID: %s\nType: %s\nUsage: %.2f\nCost: %.2f",
+			r.ID, r.Type, r.Usage, r.Cost,
+		)
+
+		recommendation, err := CallClaude(prompt)
+		if err != nil {
+			recommendation = "Error generating AI recommendation"
 		}
 
-		result = append(result, Analysis{
-			ResourceID:    r.ID,
-			UnderUtilized: underUtilized,
-			Savings:       50.0, // mock value
-			Confidence:    confidence,
+		results = append(results, Analysis{
+			ResourceID:     r.ID,
+			UnderUtilized:  r.Usage < 30, // simple threshold
+			Savings:        r.Cost * 0.5, // mock savings
+			Recommendation: recommendation,
 		})
 	}
-	return result
+
+	return results
 }
