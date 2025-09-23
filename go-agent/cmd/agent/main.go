@@ -7,7 +7,6 @@ import (
 	config "github.com/ridhamz/AI-cloud-cost-optimizer-agent/configs"
 	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/analyzer"
 	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/aws"
-	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/executor"
 	"github.com/ridhamz/AI-cloud-cost-optimizer-agent/internal/recommender"
 )
 
@@ -43,7 +42,7 @@ func main() {
 	recs := recommender.GenerateRecommendations(analysis)
 
 	// Step 4: Execute safe actions
-	executor.ExecuteActions(recs)
+	//executor.SendReportSNS(recs)
 
 	fmt.Println("✅ Optimization run complete!")
 }

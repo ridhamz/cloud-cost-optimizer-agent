@@ -19,11 +19,12 @@ import (
 
 // Resource represents an AWS resource with usage metrics
 type Resource struct {
-	ID     string
-	Type   string
-	Usage  float64
-	Cost   float64
-	Region string
+	ID             string
+	Type           string
+	Usage          float64
+	Cost           float64
+	Region         string
+	Recommendation string
 }
 
 // FetchResources fetches EC2, RDS, and Lambda resources with CloudWatch metrics

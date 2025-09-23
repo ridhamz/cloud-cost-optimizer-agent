@@ -21,6 +21,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.77.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/rds v1.107.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sns v1.38.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.29.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.34.5 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.4 // indirect
