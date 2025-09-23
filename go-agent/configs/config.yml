@@ -1,0 +1,31 @@
+# AWS Config
+aws:
+  region: us-east-1
+  services:
+    - EC2
+    - RDS
+    - Lambda
+    - S3
+
+# Thresholds for underutilization (percentage)
+thresholds:
+  ec2_cpu_utilization: 30 # % below which instance is considered underutilized
+  rds_cpu_utilization: 25
+  lambda_invocations: 10 # e.g., functions invoked less than this count
+
+# Protected resources (never optimize)
+protected_resources:
+  - i-prod-123
+  - r-prod-456
+
+# AI settings
+ai:
+  confidence_threshold: 0.75 # only act on recommendations above this confidence
+
+# Notifications
+notifications:
+  slack_webhook_url: 'https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX'
+  email:
+    from: 'noreply@company.com'
+    to:
+      - 'devops@company.com'
