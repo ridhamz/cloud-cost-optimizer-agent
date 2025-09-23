@@ -65,7 +65,7 @@ flowchart TD
 
 ### 1️⃣ Clone the repository  
 ```bash
-git clone https://github.com/ridhamz/cloud-cost-optimizer.git
+git clone https://github.com/ridhamz/cloud-cost-optimizer-agent.git
 cd cloud-cost-optimizer
 ```
 
