@@ -9,8 +9,9 @@ import (
 
 // Structs for config.yaml
 type AWSConfig struct {
-	Region   string   `yaml:"region"`
-	Services []string `yaml:"services"`
+	Region      string   `yaml:"region"`
+	SNSTopicARN string   `yaml:"sns_topic_arn"`
+	Services    []string `yaml:"services"`
 }
 
 type Thresholds struct {

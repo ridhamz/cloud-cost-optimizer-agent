@@ -12,6 +12,7 @@ type Analysis struct {
 	UnderUtilized  bool
 	Savings        float64
 	Recommendation string
+	Type		   string
 }
 
 func AnalyzeResources(resources []aws.Resource) []Analysis {
@@ -42,6 +43,7 @@ func AnalyzeResources(resources []aws.Resource) []Analysis {
 			UnderUtilized:  underUtilized,
 			Savings:        r.Cost * 0.5,
 			Recommendation: recommendation,
+			Type: r.Type,
 		})
 	}
 

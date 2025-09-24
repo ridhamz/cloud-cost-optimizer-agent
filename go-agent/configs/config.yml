@@ -1,5 +1,6 @@
 aws:
   region: us-east-1
+  SNSTopicARN: 'arn:aws:sns:us-east-1:123456789012:YourSNSTopic'
   services:
     - EC2
     - RDS
